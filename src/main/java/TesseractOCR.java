@@ -10,8 +10,8 @@ public class TesseractOCR {
         Tesseract tesseract = new Tesseract();
         String fin = "";
         try {
-            tesseract.setDatapath("../resources/tessdata");
-            String text = tesseract.doOCR(new File("../resources/test4.png"));
+            tesseract.setDatapath("/Users/jleung00/Desktop/tessdata");
+            String text = tesseract.doOCR(new File("/Users/jleung00/Desktop/test4.png"));
             fin = text;
 
         } catch (TesseractException e) {

@@ -84,22 +84,37 @@ public class CalendarQuickstart {
 //            }
 //        }
 
-        Event event = new Event()
-                .setSummary("title");
-        DateTime startDateTime = new DateTime("2015-05-28T09:00:00-07:00");
-        EventDateTime start = new EventDateTime()
-            .setDateTime(startDateTime)
-            .setTimeZone("America/Los_Angeles");
-        event.setStart(start);
-        DateTime endDateTime = new DateTime("2015-05-28T17:00:00-07:00");
-        EventDateTime end = new EventDateTime()
-                .setDateTime(endDateTime)
-                .setTimeZone("America/Los_Angeles");
-        event.setEnd(end);
+        String text = TesseractOCR.getText();
+        String lines[] = text.split("\\r?\\n");
+        String title = "";
+        String dateStart = "";
+        String dateEnd = "";
+        for (String s : lines) {
+            if (!s.equals("")) {
+                String[] array = TesseractOCR.getInfo(s);
+                title = array[0];
+                dateStart = array[1] + "T09:00:00-07:00";
+                dateEnd = array[1] + "T17:00:00-07:00";
 
-        String calendarId = "primary";
-        event = service.events().insert(calendarId, event).execute();
-        System.out.printf("Event created: %s\n", event.getHtmlLink());
+                Event event = new Event()
+                        .setSummary(title);
+                DateTime startDateTime = new DateTime(dateStart);
+                EventDateTime start = new EventDateTime()
+                        .setDateTime(startDateTime)
+                        .setTimeZone("America/New_York");
+                event.setStart(start);
+                DateTime endDateTime = new DateTime(dateEnd);
+                EventDateTime end = new EventDateTime()
+                        .setDateTime(endDateTime)
+                        .setTimeZone("America/New_York");
+                event.setEnd(end);
 
+                String calendarId = "primary";
+                event = service.events().insert(calendarId, event).execute();
+                System.out.printf("Event created: %s\n", event.getHtmlLink());
+            }
+
+        }
     }
+
 }
