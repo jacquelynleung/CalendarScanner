@@ -1,5 +1,4 @@
 import java.io.File;
-import java.util.List;
 
 import net.sourceforge.tess4j.Tesseract;
 import net.sourceforge.tess4j.TesseractException;
@@ -10,8 +9,8 @@ public class TesseractOCR {
         Tesseract tesseract = new Tesseract();
         String fin = "";
         try {
-            tesseract.setDatapath("/Users/jleung00/Desktop/tessdata");
-            String text = tesseract.doOCR(new File("/Users/jleung00/Desktop/test4.png"));
+            tesseract.setDatapath("tessdata");
+            String text = tesseract.doOCR(new File("test4.png"));
             fin = text;
 
         } catch (TesseractException e) {

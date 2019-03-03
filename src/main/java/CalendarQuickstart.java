@@ -93,8 +93,8 @@ public class CalendarQuickstart {
             if (!s.equals("")) {
                 String[] array = TesseractOCR.getInfo(s);
                 title = array[0];
-                dateStart = array[1] + "T09:00:00-07:00";
-                dateEnd = array[1] + "T17:00:00-07:00";
+                dateStart = array[1] + "T05:00:00";
+                dateEnd = array[1] + "T29:00:00";
 
                 Event event = new Event()
                         .setSummary(title);
